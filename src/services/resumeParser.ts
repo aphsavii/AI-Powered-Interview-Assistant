@@ -1,4 +1,6 @@
-import * as pdfjsLib from 'pdfjs-dist/build/pdf';
+// pdfjs-dist v4 provides top-level entry and separate worker. Use the recommended import.
+import * as pdfjsLib from 'pdfjs-dist';
+// We will load the worker via dynamic import URL (ES module worker)
 // Create a dedicated module worker so pdf.js doesn't attempt network fetch (avoids 404/fake worker)
 // pdfjs-dist 4.x ships an ESM worker entry: pdf.worker.mjs
 let workerPortInitialized = false;
@@ -20,8 +22,9 @@ import mammoth from 'mammoth';
 try {
   const anyPdf: any = pdfjsLib;
   if (!workerPortInitialized && anyPdf.GlobalWorkerOptions && !anyPdf.GlobalWorkerOptions.workerSrc) {
+    // Provide a module worker fallback path
     const url = new URL('pdfjs-dist/build/pdf.worker.mjs', import.meta.url).toString();
-    anyPdf.GlobalWorkerOptions.workerSrc = url; // may still fetch as script if browser supports module workers differently
+    anyPdf.GlobalWorkerOptions.workerSrc = url;
   }
 } catch (e) {
   console.warn('Fallback workerSrc assignment failed', e);

@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "vite"
   },
   "dependencies": {
     "@ant-design/icons": "^5.5.0",
@@ -23,6 +24,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.11.30",
+    "@types/pdfjs-dist": "^2.10.377",
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
     "@types/uuid": "^9.0.7",
